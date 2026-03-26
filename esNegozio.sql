@@ -24,3 +24,32 @@ where nome LIKE '%a';
 select nome, prezzo_listino
 from 4CTL_modelli_prodotto
 ORDER BY prezzo_listino DESC;
+
+-- Visualizzazione delle categorie di prodotti disponibili senza ripetizioni.
+select DISTINCT categoria 
+from 4CTL_modelli_prodotto
+  
+-- Estrazione dei primi 10 prodotti arrivati in magazzino in ordine cronologico.
+select cod_seriale, data_arrivo
+from 4CTL_prodotti
+ORDER BY data_arrivo ASC
+limit 10
+
+-- Elenco dei clienti ordinati alfabeticamente per cognome e successivamente per nome.
+select * from 4CTL_clienti
+ORDER BY cognome, nome ASC
+
+-- Ricerca di tutti gli ordini effettuati nel mese di giugno 2024.
+select * from 4CTL_ordini
+WHERE data_ordine LIKE '%-06%'
+
+-- Elenco dei codici seriali in magazzino associati al nome del relativo modello.
+select * from 4CTL_modelli_prodotto mp, 4CTL_prodotti prod
+where mp.id_modello = prod.id_modello
+
+-- Ricostruzione dello scontrino: ID ordine, cognome cliente, nome modello e seriale venduto.
+select o.id_ordine, c.cognome, mp.nome, p.cod_seriale
+from 4CTL_ordine o, 4CTL_clienti c, 4CTL_modelli_prodotto mp, 4CTL_prodotti
+where o.id_cliente = c.id_cliente, mp.id_modello = p.id_modello
+
+
