@@ -49,7 +49,7 @@ where mp.id_modello = prod.id_modello
 
 -- Ricostruzione dello scontrino: ID ordine, cognome cliente, nome modello e seriale venduto.
 select o.id_ordine, c.cognome, mp.nome, p.cod_seriale
-from 4CTL_ordine o, 4CTL_clienti c, 4CTL_modelli_prodotto mp, 4CTL_prodotti
-where o.id_cliente = c.id_cliente, mp.id_modello = p.id_modello
+from 4CTL_ordini o, 4CTL_clienti c, 4CTL_modelli_prodotto mp, 4CTL_prodotti p, 4CTL_dettagli_ordine d
+where 1=1 AND o.id_ordine=d.id_ordine AND d.id_prodotto=p.id_prodotto AND o.id_cliente = c.id_cliente AND mp.id_modello = p.id_modello
 
 
